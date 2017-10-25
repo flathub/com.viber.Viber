@@ -23,7 +23,7 @@
     "--talk-name=org.freedesktop.Notifications",
     "--env=XDG_CURRENT_DESKTOP=Unity",
     "--talk-name=org.kde.StatusNotifierWatcher",
-    "--extra-data=viber.deb:bacc38034fa6d926e25122c152c867a4f576b59e920af58ce904c4e9f255773f:84861076::https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb"
+    "--extra-data=viber.deb:92822b621843654541bf144ecb77ce727a860521b00afd4acbc6938e3717b71a:97799142::https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb"
   ],
   "modules": [
     {
