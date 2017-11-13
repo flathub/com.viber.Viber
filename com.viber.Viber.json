@@ -12,7 +12,8 @@
     "--socket=x11",
     "--socket=pulseaudio",
     "--share=network",
-    "--filesystem=~/.Viber-PC",
+    /* Upstream doesn't respect XDG... */
+    "--filesystem=~/.Viber-PC:create",
     "--filesystem=xdg-pictures",
     "--filesystem=xdg-desktop",
     "--filesystem=xdg-videos",
@@ -22,8 +23,7 @@
     "--device=all",
     "--talk-name=org.freedesktop.Notifications",
     "--env=XDG_CURRENT_DESKTOP=Unity",
-    "--talk-name=org.kde.StatusNotifierWatcher",
-    "--extra-data=viber.deb:92822b621843654541bf144ecb77ce727a860521b00afd4acbc6938e3717b71a:97799142::https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb"
+    "--talk-name=org.kde.StatusNotifierWatcher"
   ],
   "modules": [
     {
@@ -42,19 +42,28 @@
           "dest-filename": "apply_extra",
           "commands": [
               "ar x viber.deb",
-              "rm -f viber.deb",
               "tar xf data.tar.xz",
-              "rm -f control.tar.gz data.tar.xz debian-binary",
-              "mv opt/* .",
-              "mv usr/* .",
+              "mv opt/viber .",
               "chmod -R a-s,go+rX,go-w .",
-              "rmdir usr",
-              "mkdir -p export/share/applications",
-              "sed 's|Icon=/usr/share/pixmaps/viber.png|Icon=com.viber.Viber|; s|Exec=/usr/bin/viber|Exec=viber|' share/applications/viber.desktop > export/share/applications/com.viber.Viber.desktop",
-              "desktop-file-edit --set-key=StartupWMClass --set-value=Viber export/share/applications/com.viber.Viber.desktop ",
-              "mkdir -p export/share/icons/hicolor/256x256/apps",
-              "cp share/viber/256x256.png export/share/icons/hicolor/256x256/apps/com.viber.Viber.png"
+
+              "install -d export/share/applications",
+              "sed 's|Icon=.*|Icon=com.viber.Viber|; s|Exec=.*|Exec=viber|;' usr/share/applications/viber.desktop > export/share/applications/com.viber.Viber.desktop",
+              "echo 'StartupWMClass=Viber' >> export/share/applications/com.viber.Viber.desktop",
+
+              "for icon_size in 16 24 32 48 64 96 128 256; do
+                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png
+               done",
+              "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
+
+              "rm -r viber.deb control.tar.gz data.tar.xz debian-binary opt usr viber/icons"
           ]
+        },
+        {
+          "type": "extra-data",
+          "filename": "viber.deb",
+          "url": "https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb",
+          "sha256": "92822b621843654541bf144ecb77ce727a860521b00afd4acbc6938e3717b71a",
+          "size": 97799142
         },
         {
           "type": "script",
