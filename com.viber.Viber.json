@@ -13,7 +13,7 @@
     "--socket=pulseaudio",
     "--share=network",
     /* Upstream doesn't respect XDG... */
-    "--filesystem=~/.Viber-PC:create",
+    "--filesystem=~/.ViberPC:create",
     "--filesystem=xdg-pictures",
     "--filesystem=xdg-desktop",
     "--filesystem=xdg-videos",
