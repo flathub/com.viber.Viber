@@ -15,6 +15,11 @@
       <image type="source">https://www.viber.com/app/uploads/main_WINDOWS.png</image>
     </screenshot>
   </screenshots>
+  <categories>
+    <category>InstantMessaging</category>
+    <category>Network</category>
+    <category>P2P</category>
+  </categories>
   <!-- These are the icons for the android apps, from https://play.google.com/store/apps/details?id=com.viber.voip -->
   <icon type="remote" height="64" width="64">https://lh3.googleusercontent.com/8WsuI2NpvYJljZshzCgLXKRLnFLzz3q4I3JGw3L0vfintPGEiTChOXDIrnoXFFfme58=w64</icon>
   <icon type="remote" height="128" width="128">https://lh3.googleusercontent.com/8WsuI2NpvYJljZshzCgLXKRLnFLzz3q4I3JGw3L0vfintPGEiTChOXDIrnoXFFfme58=w128</icon>
