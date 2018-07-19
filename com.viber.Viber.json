@@ -3,7 +3,7 @@
   "base": "io.atom.electron.BaseApp",
   "base-version": "stable",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "1.6",
+  "runtime-version": "unstable",
   "sdk": "org.freedesktop.Sdk",
   "command": "viber",
   "separate-locales": false,
@@ -34,7 +34,7 @@
         "install -Dm755 viber /app/bin/viber",
         "install -Dm644 com.viber.Viber.appdata.xml /app/share/appdata/com.viber.Viber.appdata.xml",
         "cp /usr/bin/ar /app/bin",
-        "cp /usr/lib/libbfd-*.so /app/lib"
+        "ARCH_TRIPLE=$(gcc --print-multiarch) && cp /usr/lib/${ARCH_TRIPLE}/libbfd-*.so /app/lib"
       ],
       "sources": [
         {
