@@ -10,6 +10,7 @@
   "finish-args": [
     "--share=ipc",
     "--socket=x11",
+    "--socket=wayland",
     "--socket=pulseaudio",
     "--share=network",
     /* Upstream doesn't respect XDG... */
@@ -54,6 +55,8 @@
                    install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png
                done",
               "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
+
+              "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
 
               "rm -r viber.deb control.tar.gz data.tar.xz debian-binary opt usr viber/icons"
           ]
