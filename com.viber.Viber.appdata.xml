@@ -38,8 +38,6 @@
     <content_attribute id="social-audio">intense</content_attribute>
     <content_attribute id="social-contacts">intense</content_attribute>
   </content_rating>
-  <!-- These are the icons for the android apps, from https://play.google.com/store/apps/details?id=com.viber.voip -->
-  <icon type="remote" height="64" width="64">https://lh3.googleusercontent.com/8WsuI2NpvYJljZshzCgLXKRLnFLzz3q4I3JGw3L0vfintPGEiTChOXDIrnoXFFfme58=w64</icon>
   <icon type="remote" height="128" width="128">https://lh3.googleusercontent.com/8WsuI2NpvYJljZshzCgLXKRLnFLzz3q4I3JGw3L0vfintPGEiTChOXDIrnoXFFfme58=w128</icon>
   <update_contact>nick_at_nedrichards.com</update_contact>
 </component>
