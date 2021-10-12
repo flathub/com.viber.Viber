@@ -1,85 +1,77 @@
 {
-  "app-id": "com.viber.Viber",
-  "base": "io.atom.electron.BaseApp",
-  "base-version": "20.08",
-  "runtime": "org.freedesktop.Platform",
-  "runtime-version": "20.08",
-  "sdk": "org.freedesktop.Sdk",
-  "command": "viber",
-  "separate-locales": false,
-  "finish-args": [
-    "--share=ipc",
-    "--socket=x11",
-    "--socket=wayland",
-    "--socket=pulseaudio",
-    "--share=network",
-    /* Upstream doesn't respect XDG... */
-    "--filesystem=~/.ViberPC:create",
-    "--filesystem=xdg-pictures",
-    "--filesystem=xdg-desktop",
-    "--filesystem=xdg-videos",
-    "--filesystem=xdg-documents",
-    "--filesystem=xdg-download",
-    /* needed for video chat */
-    "--device=all",
-    "--talk-name=org.freedesktop.Notifications",
-    "--env=XDG_CURRENT_DESKTOP=Unity",
-    "--talk-name=org.kde.StatusNotifierWatcher"
-  ],
-  "modules": [
-    {
-      "name": "viber",
-      "buildsystem": "simple",
-      "build-commands": [
-        "install -Dm755 apply_extra /app/bin/apply_extra",
-        "install -Dm755 viber /app/bin/viber",
-        "install -Dm644 com.viber.Viber.appdata.xml /app/share/appdata/com.viber.Viber.appdata.xml",
-        "cp /usr/bin/ar /app/bin",
-        "ARCH_TRIPLE=$(gcc --print-multiarch) && cp /usr/lib/${ARCH_TRIPLE}/libbfd-*.so /app/lib"
-      ],
-      "sources": [
+    "app-id": "com.viber.Viber",
+    "base": "io.atom.electron.BaseApp",
+    "base-version": "20.08",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "20.08",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "viber",
+    "separate-locales": false,
+    "finish-args": [
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=wayland",
+        "--socket=pulseaudio",
+        "--share=network",
+        "--filesystem=~/.ViberPC:create",
+        "--filesystem=xdg-pictures",
+        "--filesystem=xdg-desktop",
+        "--filesystem=xdg-videos",
+        "--filesystem=xdg-documents",
+        "--filesystem=xdg-download",
+        "--device=all",
+        "--talk-name=org.freedesktop.Notifications",
+        "--env=XDG_CURRENT_DESKTOP=Unity",
+        "--talk-name=org.kde.StatusNotifierWatcher"
+    ],
+    "modules": [
         {
-          "type": "script",
-          "dest-filename": "apply_extra",
-          "commands": [
-              "ar x viber.deb",
-              "tar xf data.tar.xz",
-              "mv opt/viber .",
-              "chmod -R a-s,go+rX,go-w .",
-
-              "install -d export/share/applications",
-              "sed 's|Icon=.*|Icon=com.viber.Viber|; s|Exec=.*|Exec=viber|;' usr/share/applications/viber.desktop > export/share/applications/com.viber.Viber.desktop",
-              "echo 'StartupWMClass=Viber' >> export/share/applications/com.viber.Viber.desktop",
-
-              "for icon_size in 16 24 32 48 64 96 128 256; do
-                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png
-               done",
-              "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
-
-              "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
-
-              "rm -r viber.deb control.tar.gz data.tar.xz debian-binary opt usr viber/icons"
-          ]
-        },
-        {
-          "type": "extra-data",
-          "filename": "viber.deb",
-          "url": "https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb",
-          "sha256": "1037a48d74caef33d123b166da2bfb1fe8fa67590b8669ecf25b314f41374267",
-          "size": 99693958
-        },
-        {
-          "type": "script",
-          "dest-filename": "viber",
-          "commands": [
-            "exec env TMPDIR=$XDG_CACHE_HOME /app/extra/viber/Viber $@"
-          ]
-        },
-        {
-          "type": "file",
-          "path": "com.viber.Viber.appdata.xml"
+            "name": "viber",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -Dm755 apply_extra /app/bin/apply_extra",
+                "install -Dm755 viber /app/bin/viber",
+                "install -Dm644 com.viber.Viber.appdata.xml /app/share/appdata/com.viber.Viber.appdata.xml",
+                "cp /usr/bin/ar /app/bin",
+                "ARCH_TRIPLE=$(gcc --print-multiarch) && cp /usr/lib/${ARCH_TRIPLE}/libbfd-*.so /app/lib"
+            ],
+            "sources": [
+                {
+                    "type": "script",
+                    "dest-filename": "apply_extra",
+                    "commands": [
+                        "ar x viber.deb",
+                        "tar xf data.tar.xz",
+                        "mv opt/viber .",
+                        "chmod -R a-s,go+rX,go-w .",
+                        "install -d export/share/applications",
+                        "sed 's|Icon=.*|Icon=com.viber.Viber|; s|Exec=.*|Exec=viber|;' usr/share/applications/viber.desktop > export/share/applications/com.viber.Viber.desktop",
+                        "echo 'StartupWMClass=Viber' >> export/share/applications/com.viber.Viber.desktop",
+                        "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
+                        "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
+                        "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
+                        "rm -r viber.deb control.tar.gz data.tar.xz debian-binary opt usr viber/icons"
+                    ]
+                },
+                {
+                    "type": "extra-data",
+                    "filename": "viber.deb",
+                    "url": "https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb",
+                    "sha256": "84ecfe11073638e94b4cf6b690e79f3c9314c96bd2beb82a80f8012a3584de9f",
+                    "size": 110082688
+                },
+                {
+                    "type": "script",
+                    "dest-filename": "viber",
+                    "commands": [
+                        "exec env TMPDIR=$XDG_CACHE_HOME /app/extra/viber/Viber $@"
+                    ]
+                },
+                {
+                    "type": "file",
+                    "path": "com.viber.Viber.appdata.xml"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
