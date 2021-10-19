@@ -65,8 +65,8 @@
           "type": "extra-data",
           "filename": "viber.deb",
           "url": "https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb",
-          "sha256": "1037a48d74caef33d123b166da2bfb1fe8fa67590b8669ecf25b314f41374267",
-          "size": 99693958
+          "sha256": "84ecfe11073638e94b4cf6b690e79f3c9314c96bd2beb82a80f8012a3584de9f",
+          "size": 110082688
         },
         {
           "type": "script",
