@@ -19,10 +19,10 @@
         "--filesystem=xdg-videos",
         "--filesystem=xdg-documents",
         "--filesystem=xdg-download",
+        "--own-name=org.kde.*",
         "--device=all",
         "--talk-name=org.freedesktop.Notifications",
-        "--env=XDG_CURRENT_DESKTOP=Unity",
-        "--talk-name=org.kde.StatusNotifierWatcher"
+        "--env=XDG_CURRENT_DESKTOP=Unity"
     ],
     "modules": [
         {
