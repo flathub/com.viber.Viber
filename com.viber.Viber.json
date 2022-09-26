@@ -1,9 +1,9 @@
 {
     "app-id": "com.viber.Viber",
     "base": "org.electronjs.Electron2.BaseApp",
-    "base-version": "21.08",
+    "base-version": "22.08",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "42",
+    "runtime-version": "43",
     "sdk": "org.gnome.Sdk",
     "command": "viber",
     "separate-locales": false,
