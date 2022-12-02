@@ -2,9 +2,9 @@
     "app-id": "com.viber.Viber",
     "base": "org.electronjs.Electron2.BaseApp",
     "base-version": "22.08",
-    "runtime": "org.gnome.Platform",
-    "runtime-version": "43",
-    "sdk": "org.gnome.Sdk",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "22.08",
+    "sdk": "org.freedesktop.Sdk",
     "command": "viber",
     "separate-locales": false,
     "finish-args": [
@@ -87,7 +87,33 @@
               "url": "https://github.com/google/snappy/archive/refs/tags/1.1.8.tar.gz",
               "sha256": "16b677f07832a612b0836178db7f374e414f94657c138e6993cbfc5dcc58651f"
             }
+          ],
+            "cleanup": [
+                "/include"
           ]
+        },
+        {
+            "name": "krb5",
+            "subdir": "src",
+            "config-opts": [
+                    "--prefix=/app",
+                    "--disable-rpath",
+                    "--disable-static"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://web.mit.edu/kerberos/dist/krb5/1.20/krb5-1.20.1.tar.gz",
+                    "sha256": "704aed49b19eb5a7178b34b2873620ec299db08752d6a8574f95d41879ab8851"
+                }
+            ],
+            "cleanup": [
+                "/bin",
+                "/include",
+                "/sbin",
+                "/share",
+                "/var"
+            ]
         }
     ]
 }
