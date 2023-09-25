@@ -32,16 +32,14 @@
                 "install -Dm755 apply_extra /app/bin/apply_extra",
                 "install -Dm755 viber /app/bin/viber",
                 "install -Dm644 com.viber.Viber.appdata.xml /app/share/appdata/com.viber.Viber.appdata.xml",
-                "cp /usr/bin/ar /app/bin",
-                "ARCH_TRIPLE=$(gcc --print-multiarch) && cp /usr/lib/${ARCH_TRIPLE}/libbfd-*.so /app/lib"
+                "cp /usr/bin/bsdtar /app/bin"
             ],
             "sources": [
                 {
                     "type": "script",
                     "dest-filename": "apply_extra",
                     "commands": [
-                        "ar x viber.deb",
-                        "tar xf data.tar.xz",
+                        "bsdtar -Oxf viber.deb data.tar.xz | bsdtar -xf -",
                         "mv opt/viber .",
                         "chmod -R a-s,go+rX,go-w .",
                         "install -d export/share/applications",
@@ -50,7 +48,7 @@
                         "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
                         "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
                         "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
-                        "rm -r viber.deb control.tar.xz data.tar.xz debian-binary opt usr"
+                        "rm -r viber.deb opt usr"
                     ]
                 },
                 {
