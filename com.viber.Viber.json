@@ -91,6 +91,25 @@
             ]
         },
         {
+            "name": "libevent",
+            "cleanup": [
+                "/include",
+                "/bin"
+            ],
+            "sources": [
+                {
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1606,
+                        "url-template": "https://github.com/libevent/libevent/releases/download/release-$version-stable/libevent-$version-stable.tar.gz"
+                    },
+                    "type": "archive",
+                    "url": "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz",
+                    "sha256": "92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb"
+                }
+            ]
+        },
+        {
             "name": "krb5",
             "subdir": "src",
             "config-opts": [
