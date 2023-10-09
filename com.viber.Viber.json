@@ -20,7 +20,6 @@
         "--filesystem=xdg-documents",
         "--filesystem=xdg-download",
         "--device=all",
-        "--talk-name=org.freedesktop.Notifications",
         "--env=XDG_CURRENT_DESKTOP=Unity",
         "--talk-name=org.kde.StatusNotifierWatcher"
     ],
