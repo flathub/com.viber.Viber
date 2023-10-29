@@ -21,6 +21,10 @@
         "--filesystem=xdg-download",
         "--device=all",
         "--env=XDG_CURRENT_DESKTOP=Unity",
+        "--talk-name=org.freedesktop.PowerManagement",
+        "--talk-name=org.freedesktop.ScreenSaver",
+        "--talk-name=org.gnome.SessionManager",
+        "--talk-name=org.gtk.Notifications",
         "--talk-name=org.kde.StatusNotifierWatcher"
     ],
     "modules": [
