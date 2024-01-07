@@ -21,7 +21,8 @@
     <category>P2P</category>
   </categories>
   <releases>
-	<release date="2023-06-14" version="20.3.0.1">
+    <release date="2023-09-20" version="21.0.0.1"/>
+    <release date="2023-06-14" version="20.3.0.1">
       <description>
         <ul>
           <li>This update includes some important bug fixes</li>
