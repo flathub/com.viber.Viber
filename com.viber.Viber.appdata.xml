@@ -36,6 +36,5 @@
     <content_attribute id="social-audio">intense</content_attribute>
     <content_attribute id="social-contacts">intense</content_attribute>
   </content_rating>
-  <icon type="remote" height="128" width="128">https://lh3.googleusercontent.com/8WsuI2NpvYJljZshzCgLXKRLnFLzz3q4I3JGw3L0vfintPGEiTChOXDIrnoXFFfme58=w128</icon>
   <update_contact>nick_at_nedrichards.com</update_contact>
 </component>
