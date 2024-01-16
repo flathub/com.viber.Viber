@@ -46,8 +46,8 @@
                         "install -d export/share/applications",
                         "sed 's|Icon=.*|Icon=com.viber.Viber|; s|Exec=.*|Exec=viber|;' usr/share/applications/viber.desktop > export/share/applications/com.viber.Viber.desktop",
                         "echo 'StartupWMClass=Viber' >> export/share/applications/com.viber.Viber.desktop",
-                        "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
-                        "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/512x512/apps/com.viber.Viber.svg",
+                        "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png ${FLATPAK_DEST}/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
+                        "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.viber.Viber.svg",
                         "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
                         "rm -r viber.deb opt usr"
                     ]
