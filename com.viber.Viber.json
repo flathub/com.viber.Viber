@@ -1,6 +1,5 @@
 {
     "app-id": "com.viber.Viber",
-    "base": "org.electronjs.Electron2.BaseApp",
     "base-version": "23.08",
     "runtime": "org.freedesktop.Platform",
     "runtime-version": "23.08",
@@ -9,7 +8,7 @@
     "separate-locales": false,
     "finish-args": [
         "--share=ipc",
-        "--socket=x11",
+        "--socket=fallback-x11",
         "--socket=wayland",
         "--socket=pulseaudio",
         "--share=network",
@@ -45,11 +44,11 @@
                         "bsdtar -Oxf viber.deb data.tar.xz | bsdtar -xf -",
                         "mv opt/viber .",
                         "chmod -R a-s,go+rX,go-w .",
-                        "install -d export/share/applications",
-                        "sed 's|Icon=.*|Icon=com.viber.Viber|; s|Exec=.*|Exec=viber|;' usr/share/applications/viber.desktop > export/share/applications/com.viber.Viber.desktop",
-                        "echo 'StartupWMClass=Viber' >> export/share/applications/com.viber.Viber.desktop",
-                        "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
-                        "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
+                        "install -d /app/extra/export/share/applications",
+                        "sed 's|Icon=.*|Icon=com.viber.Viber|; s|Exec=.*|Exec=viber|;' usr/share/applications/viber.desktop > /app/extra/export/share/applications/com.viber.Viber.desktop",
+                        "echo 'StartupWMClass=Viber' >> /app/extra/export/share/applications/com.viber.Viber.desktop",
+                        "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png /app/extra/export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
+                        "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg /app/extra/export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
                         "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
                         "rm -r viber.deb opt usr"
                     ]
@@ -58,8 +57,8 @@
                     "type": "extra-data",
                     "filename": "viber.deb",
                     "url": "https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb",
-                    "sha256": "e3b13a7a67886321b48e277b3aaae7d8210ab5bf6742139c905b443017af6460",
-                    "size": 152860172
+                    "sha256": "46b39b98ddb540e9b99e4d11d9abe0087d2e96b7e2508a363e7c985af41a195c",
+                    "size": 150000340
                 },
                 {
                     "type": "script",
@@ -123,8 +122,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://web.mit.edu/kerberos/dist/krb5/1.20/krb5-1.20.1.tar.gz",
-                    "sha256": "704aed49b19eb5a7178b34b2873620ec299db08752d6a8574f95d41879ab8851"
+                    "url": "https://kerberos.org/dist/krb5/1.21/krb5-1.21.2.tar.gz",
+                    "sha256": "9560941a9d843c0243a71b17a7ac6fe31c7cebb5bce3983db79e52ae7e850491"
                 }
             ],
             "cleanup": [
