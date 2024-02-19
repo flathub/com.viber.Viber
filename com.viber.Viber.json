@@ -35,6 +35,8 @@
                 "install -Dm755 apply_extra /app/bin/apply_extra",
                 "install -Dm755 viber /app/bin/viber",
                 "install -Dm644 com.viber.Viber.appdata.xml /app/share/appdata/com.viber.Viber.appdata.xml",
+                "install -Dm644 com.viber.Viber.desktop /app/share/applications/com.viber.Viber.desktop",
+                "install -Dm644 com.viber.Viber.svg /app/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
                 "cp /usr/bin/bsdtar /app/bin"
             ],
             "sources": [
@@ -45,11 +47,7 @@
                         "bsdtar -Oxf viber.deb data.tar.xz | bsdtar -xf -",
                         "mv opt/viber .",
                         "chmod -R a-s,go+rX,go-w .",
-                        "install -d export/share/applications",
-                        "sed 's|Icon=.*|Icon=com.viber.Viber|; s|Exec=.*|Exec=viber|;' usr/share/applications/viber.desktop > export/share/applications/com.viber.Viber.desktop",
-                        "echo 'StartupWMClass=Viber' >> export/share/applications/com.viber.Viber.desktop",
                         "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
-                        "install -Dm644 usr/share/icons/hicolor/scalable/apps/Viber.svg export/share/icons/hicolor/scalable/apps/com.viber.Viber.svg",
                         "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
                         "rm -r viber.deb opt usr"
                     ]
@@ -71,6 +69,14 @@
                 {
                     "type": "file",
                     "path": "com.viber.Viber.appdata.xml"
+                },
+                {
+                    "type": "file",
+                    "path": "com.viber.Viber.desktop"
+                },
+                {
+                    "type": "file",
+                    "path": "com.viber.Viber.svg"
                 }
             ]
         },
