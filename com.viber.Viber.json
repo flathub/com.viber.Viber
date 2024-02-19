@@ -85,7 +85,6 @@
             "buildsystem": "cmake",
             "config-opts": [
                 "-DSNAPPY_BUILD_TESTS=OFF",
-                "-DSNAPPY_BUILD_BENCHMARKS=OFF",
                 "-DBUILD_SHARED_LIBS=ON"
             ],
             "sources": [
