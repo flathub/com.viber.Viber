@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-  <id>com.viber.Viber.desktop</id>
+<component type="desktop-application">
+  <id>com.viber.Viber</id>
   <name>Viber</name>
   <project_license>LicenseRef-proprietary</project_license>
-  <developer_name>Viber</developer_name>
+  <developer id="com.viber"><name>Viber</name></developer>
   <summary>Send free messages and make free calls</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <url type="homepage">https://www.viber.com/</url>
+  <provides><id>com.viber.Viber.desktop</id></provides>
+  <replaces><id>com.viber.Viber.desktop</id></replaces>
   <description>
+    <p>**NOTE: This wrapper is not verified by, affiliated with, or supported by Viber.**</p>
     <p>Send free messages and make free calls to other Viber users on any device and network, in any country!</p>
     <p>Viber syncs your contacts and messages with your mobile device.</p>
   </description>
