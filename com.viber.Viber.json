@@ -1,9 +1,9 @@
 {
     "app-id": "com.viber.Viber",
     "base": "org.electronjs.Electron2.BaseApp",
-    "base-version": "24.08",
+    "base-version": "25.08",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "24.08",
+    "runtime-version": "25.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "viber",
     "separate-locales": false,
@@ -27,6 +27,19 @@
         "--talk-name=org.gtk.Notifications",
         "--talk-name=org.kde.StatusNotifierWatcher"
     ],
+    "cleanup": [
+        "/include",
+        "/lib/cmake",
+        "/lib/pkgconfig",
+        "/share/aclocal",
+        "/share/doc",
+        "/share/et",
+        "/share/examples",
+        "/share/gtk-doc",
+        "/share/man",
+        "*.la",
+        "*.a"
+    ],
     "modules": [
         {
             "name": "viber",
@@ -47,7 +60,7 @@
                         "bsdtar -Oxf viber.deb data.tar.xz | bsdtar -xf -",
                         "mv opt/viber .",
                         "chmod -R a-s,go+rX,go-w .",
-                        "for icon_size in 16 24 32 48 64 96 128 256; do\n                   install -Dm644 usr/share/viber/${icon_size}x${icon_size}.png export/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.viber.Viber.png\n               done",
+                        "install -Dm644 usr/share/viber/256x256.png export/share/icons/hicolor/256x256/apps/com.viber.Viber.png",
                         "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
                         "rm -r viber.deb opt usr"
                     ]
@@ -85,23 +98,20 @@
             "buildsystem": "cmake",
             "config-opts": [
                 "-DSNAPPY_BUILD_TESTS=OFF",
+                "-DSNAPPY_BUILD_BENCHMARKS=OFF",
                 "-DBUILD_SHARED_LIBS=ON"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/google/snappy/archive/refs/tags/1.1.8.tar.gz",
-                    "sha256": "16b677f07832a612b0836178db7f374e414f94657c138e6993cbfc5dcc58651f"
+                    "url": "https://github.com/google/snappy/archive/refs/tags/1.2.2.tar.gz",
+                    "sha256": "90f74bc1fbf78a6c56b3c4a082a05103b3a56bb17bca1a27e052ea11723292dc"
                 }
-            ],
-            "cleanup": [
-                "/include"
             ]
         },
         {
             "name": "libevent",
             "cleanup": [
-                "/include",
                 "/bin"
             ],
             "sources": [
@@ -128,16 +138,34 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://kerberos.org/dist/krb5/1.20/krb5-1.20.1.tar.gz",
-                    "sha256": "704aed49b19eb5a7178b34b2873620ec299db08752d6a8574f95d41879ab8851"
+                    "url": "https://kerberos.org/dist/krb5/1.22/krb5-1.22.tar.gz",
+                    "sha256": "652be617b4647f3c5dcac21547d47c7097101aad4e306f1778fb48e17b220ba3"
                 }
             ],
             "cleanup": [
                 "/bin",
-                "/include",
                 "/sbin",
-                "/share",
                 "/var"
+            ]
+        },
+        {
+            "//note": "Viber require libxml2-2.13, therefore we compile it, instead of using from the runtime",
+            "name": "libxml2-2.13",
+            "buildsystem": "autotools",
+            "config-opts": [
+                "--without-python",
+                "--without-debug",
+                "--without-history"
+            ],
+            "cleanup": [
+                "/bin"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libxml2/2.13/libxml2-2.13.9.tar.xz",
+                    "sha256": "a2c9ae7b770da34860050c309f903221c67830c86e4a7e760692b803df95143a"
+                }
             ]
         }
     ]
