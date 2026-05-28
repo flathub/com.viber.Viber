@@ -76,7 +76,7 @@
                     "type": "script",
                     "dest-filename": "viber",
                     "commands": [
-                        "exec env TMPDIR=$XDG_CACHE_HOME /app/extra/viber/Viber $@"
+                        "exec env TMPDIR=$XDG_CACHE_HOME FONTCONFIG_FILE=/app/etc/fonts/viber-fonts.conf /app/extra/viber/Viber $@"
                     ]
                 },
                 {
@@ -146,6 +146,20 @@
                 "/bin",
                 "/sbin",
                 "/var"
+            ]
+        },
+        {
+            "name": "viber-fonts-conf",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -Dm644 viber-fonts.conf /app/etc/fonts/viber-fonts.conf"
+            ],
+            "sources": [
+                {
+                    "type": "inline",
+                    "dest-filename": "viber-fonts.conf",
+                    "contents": "<?xml version='1.0'?>\n<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>\n<fontconfig>\n  <!-- Include the standard system fontconfig configuration -->\n  <include>/etc/fonts/fonts.conf</include>\n\n  <!-- Reject the COLRv1-format emoji font from the host.\n       Viber's Qt may not support COLRv1 rendering; the CBDT-format\n       NotoColorEmoji from the runtime will be used instead. -->\n  <selectfont>\n    <rejectfont>\n      <glob>/run/host/fonts/google-noto-color-emoji-fonts/*.ttf</glob>\n    </rejectfont>\n  </selectfont>\n</fontconfig>\n"
+                }
             ]
         },
         {
