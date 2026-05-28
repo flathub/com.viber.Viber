@@ -20,6 +20,7 @@
         "--filesystem=xdg-documents",
         "--filesystem=xdg-download",
         "--device=all",
+        "--filesystem=xdg-run/pipewire-0",
         "--env=XDG_CURRENT_DESKTOP=Unity",
         "--talk-name=org.freedesktop.PowerManagement",
         "--talk-name=org.freedesktop.ScreenSaver",
@@ -61,7 +62,6 @@
                         "mv opt/viber .",
                         "chmod -R a-s,go+rX,go-w .",
                         "install -Dm644 usr/share/viber/256x256.png export/share/icons/hicolor/256x256/apps/com.viber.Viber.png",
-                        "sed 's|Prefix=/opt/viber/|Prefix=/app/extra/viber/|; ' /app/extra/viber/qt.conf > /app/extra/viber/qt.conf",
                         "rm -r viber.deb opt usr"
                     ]
                 },
@@ -90,6 +90,26 @@
                 {
                     "type": "file",
                     "path": "com.viber.Viber.svg"
+                }
+            ]
+        },
+        {
+            "name": "libssh",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DWITH_GSSAPI=OFF",
+                "-DWITH_NACL=OFF",
+                "-DWITH_PCAP=OFF",
+                "-DBUILD_TESTING=OFF",
+                "-DBUILD_SHARED_LIBS=ON",
+                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.libssh.org/files/0.10/libssh-0.10.6.tar.xz",
+                    "sha256": "1861d498f5b6f1741b6abc73e608478491edcf9c9d4b6630eef6e74596de9dc1"
                 }
             ]
         },
