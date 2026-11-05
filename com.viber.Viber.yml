@@ -13,8 +13,11 @@ finish-args:
   - --socket=pulseaudio
   - --device=all
   - --filesystem=xdg-run/pipewire-0
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-documents
   - --filesystem=xdg-download
-  - --filesystem=xdg-documents/ViberDownloads:create
+  - --filesystem=xdg-pictures
+  - --filesystem=xdg-videos
   - --persist=.ViberPC
   - --filesystem=~/.ViberPC
   - --talk-name=org.kde.StatusNotifierWatcher
