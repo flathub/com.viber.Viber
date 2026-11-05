@@ -1,6 +1,6 @@
 id: com.viber.Viber
 runtime: org.freedesktop.Platform
-runtime-version: '25.08'
+runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
 command: viber
 separate-locales: false
@@ -16,7 +16,6 @@ finish-args:
   - --filesystem=xdg-download
   - --filesystem=xdg-documents/ViberDownloads:create
   - --filesystem=~/.ViberPC:create
-  - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.ScreenSaver
   - --talk-name=org.gnome.SessionManager
@@ -32,6 +31,10 @@ modules:
   # libgssapi_krb5 for libQt6Network
   - name: krb5
     subdir: src
+    build-options:
+      # skip krb5's -Werror flags, ccbase.c fails with glibc 2.44 C23 strchr()
+      env:
+        WARN_CFLAGS: -Wall
     config-opts:
       - --disable-static
       - --without-ldap
