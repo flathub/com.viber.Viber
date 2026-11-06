@@ -22,7 +22,6 @@ finish-args:
   - --filesystem=~/.ViberPC
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.ScreenSaver
-  - --talk-name=org.gnome.SessionManager
 
 cleanup:
   - /include
