@@ -5,6 +5,6 @@ Exec=viber %u
 Icon=com.viber.Viber
 Terminal=false
 Type=Application
-Categories=Network;InstantMessaging;P2P;
+Categories=Network;InstantMessaging;
 MimeType=x-scheme-handler/viber;
 StartupWMClass=Viber
