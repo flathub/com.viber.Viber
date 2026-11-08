@@ -50,8 +50,8 @@ modules:
       - /var
     sources:
       - type: archive
-        url: https://kerberos.org/dist/krb5/1.22/krb5-1.22.tar.gz
-        sha256: 652be617b4647f3c5dcac21547d47c7097101aad4e306f1778fb48e17b220ba3
+        url: https://kerberos.org/dist/krb5/1.22/krb5-1.22.2.tar.gz
+        sha256: 3243ffbc8ea4d4ac22ddc7dd2a1dc54c57874c40648b60ff97009763554eaf13
         x-checker-data:
           type: html
           url: https://kerberos.org/dist/
