@@ -1,0 +1,116 @@
+id: com.viber.Viber
+runtime: org.freedesktop.Platform
+runtime-version: '26.08'
+sdk: org.freedesktop.Sdk
+command: viber
+separate-locales: false
+
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=all
+  - --filesystem=xdg-run/pipewire-0
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
+  - --filesystem=xdg-pictures
+  - --filesystem=xdg-videos
+  - --persist=.ViberPC
+  - --filesystem=~/.ViberPC
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.ScreenSaver
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/man
+  - '*.a'
+  - '*.la'
+
+modules:
+  # libgssapi_krb5 for libQt6Network
+  - name: krb5
+    subdir: src
+    build-options:
+      # skip krb5's -Werror flags, ccbase.c fails with glibc 2.44 C23 strchr()
+      env:
+        WARN_CFLAGS: -Wall
+    config-opts:
+      - --disable-static
+      - --without-ldap
+      - --without-system-verto
+      - --localstatedir=/var/lib
+    cleanup:
+      - /bin
+      - /sbin
+      - /share/examples
+      - /var
+    sources:
+      - type: archive
+        url: https://kerberos.org/dist/krb5/1.22/krb5-1.22.tar.gz
+        sha256: 652be617b4647f3c5dcac21547d47c7097101aad4e306f1778fb48e17b220ba3
+        x-checker-data:
+          type: html
+          url: https://kerberos.org/dist/
+          version-pattern: krb5-(\d+\.\d+\.\d+)\.tar\.gz
+          url-template: https://kerberos.org/dist/krb5/$major.$minor/krb5-$version.tar.gz
+
+  # Qt can't render the host COLRv1 emoji font
+  - name: viber-fonts-conf
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 viber-fonts.conf /app/etc/fonts/viber-fonts.conf
+    sources:
+      - type: inline
+        dest-filename: viber-fonts.conf
+        contents: |
+          <?xml version='1.0'?>
+          <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+          <fontconfig>
+            <include>/etc/fonts/fonts.conf</include>
+            <selectfont>
+              <rejectfont>
+                <glob>/run/host/fonts/google-noto-color-emoji-fonts/*.ttf</glob>
+              </rejectfont>
+            </selectfont>
+          </fontconfig>
+
+  - name: viber
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 apply_extra /app/bin/apply_extra
+      - install -Dm755 viber.sh /app/bin/viber
+      - install -Dm644 com.viber.Viber.desktop /app/share/applications/com.viber.Viber.desktop
+      - install -Dm644 com.viber.Viber.metainfo.xml /app/share/metainfo/com.viber.Viber.metainfo.xml
+      - install -Dm644 com.viber.Viber.svg /app/share/icons/hicolor/scalable/apps/com.viber.Viber.svg
+      - install -Dm755 /usr/bin/bsdtar /app/bin/bsdtar
+    sources:
+      - type: extra-data
+        filename: viber.deb
+        url: https://download.cdn.viber.com/desktop/Linux/29.4.0/viber.deb
+        sha256: 34b3c18f5d441a9813066811d037e971e1207d439c246766abd28e185a7ecd37
+        size: 146838584
+        x-checker-data:
+          type: json
+          url: https://download.cdn.viber.com/desktop/Linux/latest.json
+          version-query: .version
+          url-query: .files["viber.deb"].url
+          is-main-source: true
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - bsdtar -Oxf viber.deb 'data.tar.*' | bsdtar -xf - ./opt/viber
+          - mv opt/viber viber
+          - rm -rf opt viber.deb
+          - chmod -R a-s,go+rX,go-w viber
+      - type: file
+        path: viber.sh
+      - type: file
+        path: com.viber.Viber.desktop
+      - type: file
+        path: com.viber.Viber.metainfo.xml
+      - type: file
+        path: com.viber.Viber.svg
