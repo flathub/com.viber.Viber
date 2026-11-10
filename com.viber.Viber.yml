@@ -9,7 +9,8 @@ finish-args:
   - --share=ipc
   - --share=network
   - --socket=wayland
-  - --socket=fallback-x11
+  # without X11 Viber aborts when the Wayland socket is unavailable
+  - --socket=x11
   - --socket=pulseaudio
   - --device=all
   - --filesystem=xdg-run/pipewire-0
